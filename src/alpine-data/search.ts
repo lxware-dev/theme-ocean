@@ -16,17 +16,19 @@ export default () => ({
     }
     this.loading = true;
     axios
-      .get("/apis/api.halo.run/v1alpha1/indices/post", {
-        params: {
+      .post("/apis/api.halo.run/v1alpha1/indices/-/search", 
+        {
           limit: 20,
           keyword: this.keys,
           highlightPreTag: "<b style='background-color:#D8EAFD;color:#1077D1'>",
           highlightPostTag: "</b>",
         },
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        }
+      )
       .then((res) => {
         this.loading = false;
         this.searchData = res.data;
